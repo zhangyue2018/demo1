@@ -280,7 +280,6 @@ class ImageSection extends Component {
     const { imageDatas } = this.props;
     let imageFigures = [];
 
-    //styleRef是获得每个figure的style引用，因为浏览器不支持用js代码直接对style[transform]进行更改，只能通过这种折中方法达到目的
     imageDatas.forEach((element, index) => {
       imageFigures.push(
         <ImageFigure
@@ -289,7 +288,6 @@ class ImageSection extends Component {
           id={"imgFig" + index}
           setRef={this.setImgFigureEle}
           arrange={imgArrangeArr[index]}
-          styleRef={this["imgFig" + index] && this["imgFig" + index].style}
           inverse={this.doInverse(index)}
           center={this.doCenter(index)}
         />

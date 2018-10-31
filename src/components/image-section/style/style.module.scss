@@ -22,6 +22,8 @@
       background-color: #fff;
       box-sizing: border-box;
 
+      z-index: 10;
+
       transform-style: preserve-3d;
       transform-origin: 0 50% 0;
       transition: transform 0.6s ease-in-out, left 0.6s ease-in-out,
@@ -30,11 +32,20 @@
       &.is-inverse {
         transform: translate(320px) rotateY(-180deg) !important;
       }
+
+      &.is-center {
+        z-index: 11;
+      }
+      //生成每张图片的旋转角度
+      @for $deg from -30 through 30 {
+        &.rotate#{$deg} {
+          transform: rotate(#{$deg}deg);
+        }
+      }
     }
 
     figcaption {
       text-align: center;
-      //transform-style: preserve-3d;
       .img-title {
         margin: 20px 0 0 0;
         color: #a7a0a2;

@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import debounce from "lodash/debounce";
 
-import styles from './style/style.module.scss';
-
-
+import styles from "./style/style.module.scss";
 
 class ImageFigure extends Component {
   constructor() {
@@ -24,9 +22,8 @@ class ImageFigure extends Component {
     }
   };
 
-
   render() {
-    let { data, id, setRef, arrange, styleRef } = this.props,
+    let { data, id, setRef, arrange } = this.props,
       styleObj = {};
     let isInverse = arrange && arrange.isInverse;
 
@@ -34,31 +31,13 @@ class ImageFigure extends Component {
       styleObj = arrange.pos;
     }
 
-    // //如果图片的旋转角度有值并且不为0，添加旋转角度
-    // if(arrange && arrange.rotate) {
-    //   (['-moz-', '-ms-', '-webkit-', '']).forEach((value) => {
-    //     styleObj[value + "transform"] = "rotate(" + arrange.rotate + "deg)";
-    //   });
-    // }
-
-    //设置每张图片的旋转角度
-    if (arrange && styleRef) {
-      ["MozTransform", "msTransform", "WebkitTransform", "transform"].forEach(
-        value => {
-          styleRef[value] = "rotate(" + arrange.rotate + "deg)";
-        }
-      );
-      if (arrange.isCenter) {
-        styleRef.zIndex = 11;
-      } else {
-        styleRef.zIndex = 10;
-      }
-    }
-
-
     return (
       <figure
-        className={`${styles["img-figure"]} ${isInverse ? styles["is-inverse"] : ""}`}
+        className={`${styles["img-figure"]} ${
+          isInverse ? styles["is-inverse"] : ""
+        } ${arrange.isCenter ? styles["is-center"] : ""} ${
+          styles["rotate" + arrange.rotate]
+        }`}
         ref={element => {
           setRef(id, element);
         }}
