@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { debounce } from "lodash";
 import ImageSection from "./image-section/ImageSection";
 import ControllerSection from "./controller-section/ControllerSection";
 import styles from '../styles/main.module.scss';
@@ -23,8 +22,6 @@ class GalleryByReactApp extends Component {
         isInverse: false
       }
     };
-    //防抖
-    this.resize = debounce(this.resize, 200);
   }
 
   handleClick = clickInfo => {

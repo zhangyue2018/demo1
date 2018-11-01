@@ -6,7 +6,7 @@ class ControllerUnit extends Component {
   constructor() {
     super();
     //节流
-    this.handleClick = throttle(this.handleClick, 500);
+    this.handleClick = throttle(this.handleClick, 200);
   }
   handleClick = e => {
     let props = this.props;

@@ -9,70 +9,139 @@
 
   perspective: 1800px;
 
-  @at-root {
-    .img-figure {
-      position: absolute;
-      width: 320px;
-      height: 360px;
-      margin: 0;
-      padding: 30px;
-      text-align: center;
-      cursor: pointer;
+  /*
+  *$scale是缩放倍数
+  */
+  @mixin imgFigure($scale) {
+    position: absolute;
+    width: 320px * $scale;
+    height: 360px * $scale;
+    margin: 0;
+    padding: 30px * $scale 0;
+    text-align: center;
+    cursor: pointer;
 
-      background-color: #fff;
-      box-sizing: border-box;
+    background-color: #fff;
+    box-sizing: border-box;
 
-      z-index: 10;
+    z-index: 10;
 
-      transform-style: preserve-3d;
-      transform-origin: 0 50% 0;
-      transition: transform 0.6s ease-in-out, left 0.6s ease-in-out,
-        top 0.6s ease-in-out;
+    transform-style: preserve-3d;
+    transform-origin: 0 50% 0;
+    transition: transform 0.6s ease-in-out, left 0.6s ease-in-out,
+      top 0.6s ease-in-out;
 
-      &.is-inverse {
-        transform: translate(320px) rotateY(-180deg) !important;
-      }
-
-      &.is-center {
-        z-index: 11;
-      }
-      //生成每张图片的旋转角度
-      @for $deg from -30 through 30 {
-        &.rotate#{$deg} {
-          transform: rotate(#{$deg}deg);
-        }
-      }
+    img {
+      width: 240px * $scale;
+      height: 240px * $scale;
     }
 
+    &.is-inverse {
+      transform: translate(320px * $scale) rotateY(-180deg) !important;
+    }
+
+    &.is-center {
+      z-index: 11;
+    }
+    //生成每张图片的旋转角度
+    @for $deg from -30 through 30 {
+      &.rotate#{$deg} {
+        transform: rotate(#{$deg}deg);
+      }
+    }
+  }
+
+  /*
+  *$imgTitleMargin根据不同的screen的size指定不同的margin，$fontSize根据不同的screen的size指定不同的font-size
+  */
+  @mixin imgTitle($imgTitleMargin, $fontSize) {
     figcaption {
       text-align: center;
       .img-title {
-        margin: 20px 0 0 0;
+        margin: $imgTitleMargin 0 0 0;
         color: #a7a0a2;
-        font-size: 24px;
+        font-size: $fontSize;
       }
     }
+  }
+
+  /*
+  *$scale背面进行介绍的元素的padding的缩放倍数，$fontSize指定介绍文字的font-size
+  */
+  @mixin imgBack($scale, $fontSize) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 50px * $scale 40px * $scale;
+    overflow: auto;
+
+    color: #232fdb;
+    font-size: $fontSize;
+    line-height: 1.25;
+    text-align: left;
+
+    background-color: #fff;
+    box-sizing: border-box;
+    transform: rotateY(-180deg) translateZ(1px);
+    backface-visibility: hidden;
+
+    p {
+      margin: 0;
+      text-align: justify;
+    }
+  }
+
+  @at-root {
+    /*
+    *屏幕width小于768px的css样式
+    */
+    .img-figure {
+        @include imgFigure(0.5);
+      }
+    @include imgTitle(6px, 15px);
+    
     .img-back {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      padding: 50px 40px;
-      overflow: auto;
+      @include imgBack(0.5, 15px);
+    }
 
-      color: #232fdb;
-      font-size: 22px;
-      line-height: 1.25;
-      text-align: left;
+    /*
+    *屏幕width大于768px小于992px时的css样式
+    */
+    @media screen and (min-width: 768px){
+      .img-figure {
+        @include imgFigure(0.62);
+      }
+      @include imgTitle(10px, 22px);
+      .img-back {
+        @include imgBack(0.5, 18px);
+      }
+    }
 
-      background-color: #fff;
-      box-sizing: border-box;
-      transform: rotateY(-180deg) translateZ(1px);
-      backface-visibility: hidden;
+    /*
+    *屏幕width大于992px小于1200px时的css样式
+    */
+    @media screen and (min-width: 992px){
+      .img-figure {
+        @include imgFigure(0.87);
+      }
+      @include imgTitle(15px, 24px);
+      .img-back {
+        @include imgBack(0.7, 20px);
+      }
+    }
 
-      p {
-        margin: 0;
+    /*
+    *屏幕width大于1200px时的css样式
+    */
+    @media screen and (min-width: 1200px){
+      .img-figure {
+        @include imgFigure(1);
+      }
+      @include imgTitle(20px, 24px);
+      .img-back {
+        @include imgBack(1, 22px);
       }
     }
   }

@@ -21,6 +21,8 @@
   width: 100%;
   z-index: 101;
   text-align: center;
+  overflow: auto;
+  white-space: nowrap;
 
   @at-root {
     .controller-unit {

@@ -142,8 +142,8 @@ class ImageSection extends Component {
   //拿到imageFigure大小
   getImageSize = () => {
     let imgFigDOM = this["imgFig0"];
-    let imgW = imgFigDOM.scrollWidth,
-      imgH = imgFigDOM.scrollHeight,
+    let imgW = imgFigDOM.clientWidth,
+      imgH = imgFigDOM.clientHeight,
       halfImgW = Math.ceil(imgW / 2),
       halfImgH = Math.ceil(imgH / 2);
 

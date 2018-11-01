@@ -33,18 +33,10 @@ class Controller extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // let { stageSize, centerIndex, clickInfo } = nextProps;
-    // let preStageSize = this.props.stageSize;
     let preClickInfo = this.props.clickInfo;
     let { clickInfo } = nextProps;
 
     let {controllerInfos} = this.state;
-
-    // if (
-    //   preStageSize.stageH !== stageSize.stageH ||
-    //   preStageSize.stageW !== stageSize.stageW
-    // ) {
-    // }
 
     //当点击中心图片以外的图片或者改变window的size时
     if (clickInfo.name === "center") {
