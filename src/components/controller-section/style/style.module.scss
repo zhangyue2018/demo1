@@ -23,6 +23,7 @@
   text-align: center;
   overflow: auto;
   white-space: nowrap;
+  overflow-y: hidden;
 
   @at-root {
     .controller-unit {

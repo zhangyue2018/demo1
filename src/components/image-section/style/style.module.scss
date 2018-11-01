@@ -26,6 +26,8 @@
 
     z-index: 10;
 
+    transform: translate(320px * $scale) rotateY(0deg);
+
     transform-style: preserve-3d;
     transform-origin: 0 50% 0;
     transition: transform 0.6s ease-in-out, left 0.6s ease-in-out,
@@ -34,10 +36,26 @@
     img {
       width: 240px * $scale;
       height: 240px * $scale;
+      //为了兼容ie11
+      opacity: 1;      
+      transition: opacity 0s ease-in-out .3s;
     }
 
     &.is-inverse {
       transform: translate(320px * $scale) rotateY(-180deg) !important;
+      //为了兼容ie11
+      & img {
+        opacity: 0;
+      }
+      & figcaption {
+        opacity: 0;
+      }
+      & .img-back {
+        opacity: 1;
+        backface-visibility: visible;
+      }
+      //--end为了兼容ie11
+
     }
 
     &.is-center {
@@ -57,10 +75,14 @@
   @mixin imgTitle($imgTitleMargin, $fontSize) {
     figcaption {
       text-align: center;
+      //为了兼容ie11
+      opacity: 1;
+      transition: opacity 0s ease-in-out .3s;
       .img-title {
         margin: $imgTitleMargin 0 0 0;
         color: #a7a0a2;
         font-size: $fontSize;
+        backface-visibility: hidden;
       }
     }
   }
@@ -85,7 +107,11 @@
     background-color: #fff;
     box-sizing: border-box;
     transform: rotateY(-180deg) translateZ(1px);
-    backface-visibility: hidden;
+    
+    //为了兼容ie11
+    opacity: 0;
+    backface-visibility: visible;
+    transition: opacity 0s ease-in-out .3s;
 
     p {
       margin: 0;

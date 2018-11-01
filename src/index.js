@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import "@babel/polyfill";
 import GalleryByReactApp from './components/GalleryByReactApp';
 import * as serviceWorker from './serviceWorker';
 
